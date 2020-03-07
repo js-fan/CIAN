@@ -27,7 +27,7 @@ Framework of the approach. Our approach learns the cross image relationships to 
 
 - Download the seeds from [here](https://drive.google.com/open?id=1w2WIEtQe2F1tgxlINpk5mi-BlL_gue8z), untar and put the folder `CIAN_SEEDS` into `CIAN/data/Seeds/` . We use the VGG16 based [CAM](http://cnnlocalization.csail.mit.edu/Zhou_Learning_Deep_Features_CVPR_2016_paper.pdf) to generate the foreground and the saliency model [DRFI](https://github.com/playerkk/drfi_cpp) to generate the background. You can also generate the seeds by yourself.
 
-- Download the ImageNet pretrained parameters and put them into the folder `CIAN/data/pretrained`. We adopt the models provided by the official MXNet [modelzoo](https://github.com/apache/incubator-mxnet/blob/master/example/image-classification/common/modelzoo.py):
+- Download the ImageNet pretrained parameters and put them into the folder `CIAN/data/pretrained`. We adopt the models provided by the official MXNet [model-zoo](https://github.com/apache/incubator-mxnet/blob/master/example/image-classification/common/modelzoo.py):
   - ResNet101 [http://data.mxnet.io/models/imagenet/resnet/101-layers/resnet-101-0000.params]
   - ResNet50 [http://data.mxnet.io/models/imagenet/resnet/50-layers/resnet-50-0000.params]
 

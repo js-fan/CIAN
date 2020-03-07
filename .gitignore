@@ -11,10 +11,6 @@ __pycache__
 *.npy
 *.pkl
 
-# Images
-*.jpg
-*.png
-
 # caffe
 *.caffemodel
 
