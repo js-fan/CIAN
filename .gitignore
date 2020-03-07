@@ -1,0 +1,22 @@
+# Python
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+__pycache__
+
+# Params
+*.params
+*.states
+*.npy
+*.pkl
+
+# Images
+*.jpg
+*.png
+
+# caffe
+*.caffemodel
+
+# Vim
+*.swp
