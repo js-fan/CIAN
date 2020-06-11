@@ -5,7 +5,7 @@ from .voc_seg_loader import load_batch_semantic
 class VOCSegGroupLoader(mx.io.DataIter):
     def __init__(self, image_root, label_root, annotation_root, data_list,
             batch_size, group_size, num_block, target_size,
-            pad=False, shuffle=False, rand_scale=False, rand_mirror=False, rand_crop=False):
+            pad=False, shuffle=False, rand_scale=False, rand_mirror=False, rand_crop=False, downsample=None):
 
         assert group_size >= 2, "'group_size': # common-class images, typical value is 2 for pairs"
         assert num_block >= 1,  "'num_block':  should equal # GPU"
@@ -33,6 +33,7 @@ class VOCSegGroupLoader(mx.io.DataIter):
         self.rand_scale = rand_scale
         self.rand_mirror = rand_mirror
         self.rand_crop = rand_crop
+        self.downsample = downsample
 
         scale_pool = [0.5, 0.75, 1, 1.25, 1.5]
         self.scale_sampler = lambda : np.random.choice(scale_pool)
@@ -84,6 +85,6 @@ class VOCSegGroupLoader(mx.io.DataIter):
         self.cache_image_src_list = image_src_list
 
         batch = load_batch_semantic(image_src_list, label_src_list, self.target_size, self.scale_sampler,
-                                    self.rand_scale, self.rand_mirror, self.rand_crop)
+                                    self.rand_scale, self.rand_mirror, self.rand_crop, self.downsample)
         return batch
 

@@ -54,8 +54,9 @@ def build_model(args, for_training=True):
             label_names=('label',) if for_training else None,
             context=[mx.gpu(int(gpu_id)) for gpu_id in setGPU(args.gpus).split(',')],
             fixed_param_names=fixed_param_names)
+    label_size = (args.image_size - 1) // 8 +  1
     mod.bind(data_shapes=[('data', (args.batch_size, 3, args.image_size, args.image_size))],
-            label_shapes=[('label', (args.batch_size, args.image_size, args.image_size))] if for_training else None )
+            label_shapes=[('label', (args.batch_size, label_size, label_size))] if for_training else None )
 
     # load / initialize parameters
     if for_training:
@@ -88,7 +89,7 @@ def run_training(args):
 
     loader = VOCSegGroupLoader(args.image_root, args.label_root, args.annotation_root,
             args.data_list, args.batch_size, args.group_size, len(mod._context), args.image_size,
-            pad=False, shuffle=True, rand_scale=True, rand_mirror=True, rand_crop=True )
+            pad=False, shuffle=True, rand_scale=True, rand_mirror=True, rand_crop=True, downsample=8)
 
     saveParams = SaveParams(mod, args.snapshot, args.model, args.num_save)
     lrScheduler = LrScheduler('poly', args.lr, {'num_epoch': args.num_epoch, 'power': 0.9} )
